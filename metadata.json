@@ -1,0 +1,6 @@
+{
+  "name": "Accessible Tabs Component Lab",
+  "description": "A reusable, accessible tabs component built with semantic HTML, CSS variables, and vanilla JavaScript following WAI-ARIA authoring practices.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,461 @@
+/* ==========================================================================
+   Accessible Tabs Component Stylesheet
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS Custom Properties (Theme & Spacing Variables)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Brand & Accent Colors */
+  --tabs-primary: #2563eb;         /* Royal Blue 600 */
+  --tabs-primary-hover: #1d4ed8;   /* Royal Blue 700 */
+  --tabs-primary-subtle: #eff6ff;  /* Royal Blue 50 */
+  --tabs-focus-ring: rgba(37, 99, 235, 0.4);
+
+  /* Surface & Background Colors */
+  --tabs-bg-page: #f8fafc;         /* Slate 50 */
+  --tabs-bg-card: #ffffff;         /* Clean White */
+  --tabs-bg-nav: #f1f5f9;          /* Slate 100 */
+  --tabs-bg-hover: #e2e8f0;        /* Slate 200 */
+
+  /* Text Colors */
+  --tabs-text-main: #0f172a;       /* Slate 900 */
+  --tabs-text-muted: #64748b;      /* Slate 500 */
+  --tabs-text-active: #2563eb;     /* Blue 600 */
+
+  /* Borders & Shadows */
+  --tabs-border-color: #e2e8f0;    /* Slate 200 */
+  --tabs-border-radius: 12px;
+  --tabs-tab-radius: 8px;
+  --tabs-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05),
+                 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+
+  /* Spacing */
+  --tabs-padding-nav: 6px;
+  --tabs-padding-tab-x: 18px;
+  --tabs-padding-tab-y: 10px;
+  --tabs-padding-panel: 32px;
+
+  /* Animation & Transitions */
+  --tabs-transition-speed: 200ms;
+  --tabs-transition-timing: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Page Scaffolding
+   -------------------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--tabs-bg-page);
+  color: var(--tabs-text-main);
+  line-height: 1.5;
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+
+.page-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--tabs-text-main);
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+}
+
+.page-subtitle {
+  font-size: 1.05rem;
+  color: var(--tabs-text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   3. Tabs Component Container (Card Style)
+   -------------------------------------------------------------------------- */
+.tabs {
+  background-color: var(--tabs-bg-card);
+  border: 1px solid var(--tabs-border-color);
+  border-radius: var(--tabs-border-radius);
+  box-shadow: var(--tabs-shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   4. Tab Navigation List (role="tablist")
+   -------------------------------------------------------------------------- */
+.tabs__nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--tabs-bg-nav);
+  padding: var(--tabs-padding-nav);
+  border-bottom: 1px solid var(--tabs-border-color);
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  -webkit-overflow-scrolling: touch;
+}
+
+.tabs__nav::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* --------------------------------------------------------------------------
+   5. Tab Button (role="tab")
+   -------------------------------------------------------------------------- */
+.tabs__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: var(--tabs-padding-tab-y) var(--tabs-padding-tab-x);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--tabs-text-muted);
+  background: transparent;
+  border: none;
+  border-radius: var(--tabs-tab-radius);
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  transition: color var(--tabs-transition-speed) ease,
+              background-color var(--tabs-transition-speed) ease,
+              box-shadow var(--tabs-transition-speed) ease;
+  position: relative;
+  min-height: 44px; /* Accessible touch target height */
+}
+
+.tabs__tab:hover:not(.is-active) {
+  color: var(--tabs-text-main);
+  background-color: var(--tabs-bg-hover);
+}
+
+/* Focus styles (Accessibility requirement) */
+.tabs__tab:focus-visible {
+  outline: 2px solid var(--tabs-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px var(--tabs-focus-ring);
+  z-index: 1;
+}
+
+/* Active Tab Styles */
+.tabs__tab.is-active,
+.tabs__tab[aria-selected="true"] {
+  color: var(--tabs-text-active);
+  background-color: var(--tabs-bg-card);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* Tab Icon & Text */
+.tabs__tab-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabs__tab-icon svg {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   6. Tab Panels (role="tabpanel")
+   -------------------------------------------------------------------------- */
+.tabs__panels {
+  position: relative;
+}
+
+.tabs__panel {
+  padding: var(--tabs-padding-panel);
+  display: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity var(--tabs-transition-speed) var(--tabs-transition-timing),
+              transform var(--tabs-transition-speed) var(--tabs-transition-timing);
+}
+
+/* When active, show and animate */
+.tabs__panel.is-active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Visible focus outline when panel receives programmatic/tab focus */
+.tabs__panel:focus-visible {
+  outline: 2px solid var(--tabs-primary);
+  outline-offset: -2px;
+}
+
+/* --------------------------------------------------------------------------
+   7. Respect prefers-reduced-motion (Accessibility Requirement)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .tabs__panel {
+    transform: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. Optional Modifier: Vertical Tabs (Lab Task 4)
+   -------------------------------------------------------------------------- */
+@media (min-width: 768px) {
+  .tabs--vertical {
+    flex-direction: row;
+  }
+
+  .tabs--vertical .tabs__nav {
+    flex-direction: column;
+    align-items: stretch;
+    border-bottom: none;
+    border-right: 1px solid var(--tabs-border-color);
+    min-width: 200px;
+    padding: 12px;
+  }
+
+  .tabs--vertical .tabs__tab {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .tabs--vertical .tabs__panels {
+    flex: 1;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. Sample Panel Content Styling
+   -------------------------------------------------------------------------- */
+.panel-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--tabs-text-main);
+}
+
+.panel-lead {
+  font-size: 1.05rem;
+  color: var(--tabs-text-muted);
+  margin-bottom: 24px;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.panel-card {
+  padding: 18px;
+  border-radius: 8px;
+  border: 1px solid var(--tabs-border-color);
+  background-color: #fafafa;
+}
+
+.panel-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--tabs-text-main);
+}
+
+.panel-card p {
+  font-size: 0.875rem;
+  color: var(--tabs-text-muted);
+}
+
+.feature-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.feature-list li {
+  padding-left: 24px;
+  position: relative;
+  font-size: 0.95rem;
+  color: var(--tabs-text-muted);
+}
+
+.feature-list li strong {
+  color: var(--tabs-text-main);
+}
+
+.feature-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--tabs-primary);
+  font-weight: bold;
+}
+
+/* Pricing Grid */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.pricing-card {
+  border: 1px solid var(--tabs-border-color);
+  border-radius: 10px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--tabs-bg-card);
+}
+
+.pricing-card.is-featured {
+  border-color: var(--tabs-primary);
+  box-shadow: 0 0 0 1px var(--tabs-primary);
+  position: relative;
+}
+
+.pricing-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--tabs-primary);
+  margin-bottom: 12px;
+}
+
+.pricing-cost {
+  font-size: 0.9rem;
+  color: var(--tabs-text-muted);
+  margin-bottom: 8px;
+}
+
+.pricing-cost .price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--tabs-text-main);
+}
+
+.pricing-desc {
+  font-size: 0.85rem;
+  color: var(--tabs-text-muted);
+  margin-bottom: 16px;
+}
+
+.pricing-features {
+  list-style: disc inside;
+  font-size: 0.85rem;
+  color: var(--tabs-text-muted);
+  margin-bottom: 24px;
+  flex: 1;
+}
+
+.pricing-features li {
+  margin-bottom: 6px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 150ms ease, border-color 150ms ease;
+  min-height: 40px;
+}
+
+.btn-primary {
+  background-color: var(--tabs-primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--tabs-primary-hover);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border-color: var(--tabs-border-color);
+  color: var(--tabs-text-main);
+}
+
+.btn-secondary:hover {
+  background-color: var(--tabs-bg-hover);
+}
+
+/* Contact Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 560px;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--tabs-text-main);
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px 14px;
+  border: 1px solid var(--tabs-border-color);
+  border-radius: 6px;
+  font-size: 0.9375rem;
+  color: var(--tabs-text-main);
+  background-color: #ffffff;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--tabs-primary);
+  box-shadow: 0 0 0 3px var(--tabs-focus-ring);
+}

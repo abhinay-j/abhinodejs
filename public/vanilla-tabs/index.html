@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accessible Tabs Component</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page-container">
+    <header class="page-header">
+      <h1 class="page-title">Accessible Tabs Component</h1>
+      <p class="page-subtitle">
+        Switch between different content views using accessible, keyboard-friendly navigation tabs.
+      </p>
+    </header>
+
+    <!-- Primary Tabs Group -->
+    <div class="tabs" id="product-tabs" data-sync-hash="true">
+      <!-- Tab Navigation List -->
+      <div class="tabs__nav" role="tablist" aria-label="Product Information">
+        <button
+          type="button"
+          role="tab"
+          class="tabs__tab is-active"
+          id="tab-overview"
+          aria-selected="true"
+          aria-controls="panel-overview"
+          tabindex="0"
+        >
+          <span class="tabs__tab-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </span>
+          <span class="tabs__tab-text">Overview</span>
+        </button>
+
+        <button
+          type="button"
+          role="tab"
+          class="tabs__tab"
+          id="tab-features"
+          aria-selected="false"
+          aria-controls="panel-features"
+          tabindex="-1"
+        >
+          <span class="tabs__tab-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </span>
+          <span class="tabs__tab-text">Features</span>
+        </button>
+
+        <button
+          type="button"
+          role="tab"
+          class="tabs__tab"
+          id="tab-pricing"
+          aria-selected="false"
+          aria-controls="panel-pricing"
+          tabindex="-1"
+        >
+          <span class="tabs__tab-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="14" x="2" y="5" rx="2"/>
+              <line x1="2" x2="22" y1="10" y2="10"/>
+            </svg>
+          </span>
+          <span class="tabs__tab-text">Pricing</span>
+        </button>
+
+        <button
+          type="button"
+          role="tab"
+          class="tabs__tab"
+          id="tab-contact"
+          aria-selected="false"
+          aria-controls="panel-contact"
+          tabindex="-1"
+        >
+          <span class="tabs__tab-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+          </span>
+          <span class="tabs__tab-text">Contact</span>
+        </button>
+      </div>
+
+      <!-- Tab Content Panels -->
+      <div class="tabs__panels">
+        <!-- Panel 1: Overview -->
+        <section
+          role="tabpanel"
+          class="tabs__panel is-active"
+          id="panel-overview"
+          aria-labelledby="tab-overview"
+          tabindex="0"
+        >
+          <h2 class="panel-heading">Modern Cloud Architecture Platform</h2>
+          <p class="panel-lead">
+            Accelerate your engineering workflow with unified deployments, automated edge orchestration, and real-time observability.
+          </p>
+          <div class="panel-grid">
+            <div class="panel-card">
+              <h3>Fast Prototyping</h3>
+              <p>Spin up isolated staging environments in under 30 seconds with pre-configured developer templates.</p>
+            </div>
+            <div class="panel-card">
+              <h3>Built-in Security</h3>
+              <p>End-to-end encryption, automated TLS certificates, and fine-grained role-based access control.</p>
+            </div>
+            <div class="panel-card">
+              <h3>Global CDN</h3>
+              <p>Ultra-low latency delivery powered by a edge network spanning 280+ points of presence worldwide.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Panel 2: Features -->
+        <section
+          role="tabpanel"
+          class="tabs__panel"
+          id="panel-features"
+          aria-labelledby="tab-features"
+          tabindex="0"
+          hidden
+        >
+          <h2 class="panel-heading">Engineered for High-Velocity Teams</h2>
+          <p class="panel-lead">
+            Every feature is designed to reduce cognitive load and eliminate deployment friction.
+          </p>
+          <ul class="feature-list">
+            <li>
+              <strong>Instant Branch Previews:</strong> Every pull request receives an isolated ephemeral environment.
+            </li>
+            <li>
+              <strong>Live Telemetry:</strong> Distributed tracing, structured log queries, and zero-config metrics dashboards.
+            </li>
+            <li>
+              <strong>Zero-Downtime Rollouts:</strong> Automated blue-green deployments with instant rollback safety nets.
+            </li>
+            <li>
+              <strong>Custom Domain Management:</strong> Automated DNS validation and multi-region routing.
+            </li>
+          </ul>
+        </section>
+
+        <!-- Panel 3: Pricing -->
+        <section
+          role="tabpanel"
+          class="tabs__panel"
+          id="panel-pricing"
+          aria-labelledby="tab-pricing"
+          tabindex="0"
+          hidden
+        >
+          <h2 class="panel-heading">Simple, Transparent Pricing</h2>
+          <p class="panel-lead">
+            Choose the tier that matches your team's scale. Upgrade, downgrade, or cancel anytime.
+          </p>
+          <div class="pricing-grid">
+            <div class="pricing-card">
+              <span class="pricing-badge">Starter</span>
+              <div class="pricing-cost"><span class="price">$0</span> / month</div>
+              <p class="pricing-desc">For indie hackers and hobby projects needing reliable web hosting.</p>
+              <ul class="pricing-features">
+                <li>3 active projects</li>
+                <li>Global CDN edge</li>
+                <li>Community Discord support</li>
+              </ul>
+              <button type="button" class="btn btn-secondary">Get Started Free</button>
+            </div>
+            <div class="pricing-card is-featured">
+              <span class="pricing-badge">Professional</span>
+              <div class="pricing-cost"><span class="price">$29</span> / month</div>
+              <p class="pricing-desc">For growing startups and product teams delivering commercial apps.</p>
+              <ul class="pricing-features">
+                <li>Unlimited projects</li>
+                <li>Automated preview deployments</li>
+                <li>Priority 24/7 engineering support</li>
+              </ul>
+              <button type="button" class="btn btn-primary">Start 14-Day Trial</button>
+            </div>
+            <div class="pricing-card">
+              <span class="pricing-badge">Enterprise</span>
+              <div class="pricing-cost"><span class="price">$99</span> / month</div>
+              <p class="pricing-desc">Dedicated infrastructure, SSO compliance, and tailored SLAs.</p>
+              <ul class="pricing-features">
+                <li>Custom SLA (99.99%)</li>
+                <li>Dedicated VPC peering</li>
+                <li>Dedicated technical account manager</li>
+              </ul>
+              <button type="button" class="btn btn-secondary">Contact Sales</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Panel 4: Contact -->
+        <section
+          role="tabpanel"
+          class="tabs__panel"
+          id="panel-contact"
+          aria-labelledby="tab-contact"
+          tabindex="0"
+          hidden
+        >
+          <h2 class="panel-heading">Get in Touch with Our Team</h2>
+          <p class="panel-lead">
+            Have questions about architecture, migration, or enterprise compliance? We're here to help.
+          </p>
+          <form class="contact-form" onsubmit="event.preventDefault(); alert('Message submitted successfully!');">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-name">Full Name</label>
+                <input type="text" id="contact-name" name="name" required placeholder="Alex Morgan" />
+              </div>
+              <div class="form-group">
+                <label for="contact-email">Work Email</label>
+                <input type="email" id="contact-email" name="email" required placeholder="alex@company.com" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" name="message" rows="4" required placeholder="Tell us about your project requirements..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
